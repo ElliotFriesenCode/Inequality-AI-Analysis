@@ -1,0 +1,57 @@
+EXPLORING GLOBAL ECONOMIC AND MENTAL HEALTH: A COMPUTATIONAL ANALYSIS --- README
+
+Description: 
+In this program we are able to compare various economic statistics (Education Expenditure %, Health Expenditure %, GDP, and Gini_Index)
+to various mental health statistics (Anxiety levels, Depression levels, and Drug Addiction levels).
+
+Instructions:
+
+DEFAULT TEST
+1. Run main.py
+ - this will call the three different function files (geospatial_over_time.py, specific_country_plots.py, and specific_time.py)
+
+
+Note: All edits below should be done in main.py
+
+To change the machine learning model (specific_time.py):
+1. Change the year: can be between 2001 and 2017 inclusive
+2. Edit the load_data_specific_time(parameter) parameter. This can be either: economic_stats[index] where index is between 0 and 3
+or mental_health_disorders[index] where index is between 0 and 2. 
+3. calling load_data_specific_time(parameter, year) will return a dataframe
+4. Pass this dataframe into create_df_for_model(dataframe) where dataframe is the returned dataframe. This will then return a dataframe used for the 
+machine learning model
+5. Call create_and_train_model(mental_health_disorders[index], dataframe). mental_health_disorders[index] is the
+mental health disorder you wish to have as the output node for the neural network. Pass the dataframe returned from the create_df_for_model function.
+Calling create_and_train_model(mental_health_disorders[index], dataframe) will run the model with 50 epochs (training iterations)
+
+
+
+To change the specific country data plots (specific_country.py): (does not include gini_index)
+1. Edit the country variable to be the desired country
+2. set chosen_mental_health_disorder to be some mental_health_disorder[index] 
+3. Call load_data_for_country(country, chosen_mental_health_disorder). This will return an array of three floats.
+These floats are the spearman correlation coefficients, where index 0 is the Health Expenditure % vs. chosen_mental_health_disorder correlation
+index 1 is the Education Expenditure % vs. chosen_mental_health_disorder correlation and index 2 is the GDP vs. chosen_mental_health_disorder correlation.
+4. print these out using the print_spearman(spearman_array) function with the parameter being the returned array from load_data_for_country
+
+To change the geospatial over time plots (geospatial_over_time.py):
+1. call the load_data_world(chosen_mental_health_disorder) function with a different mental_health_disorder[index]
+
+
+File list:
+main.py: Calls the various functions needed for the program
+geospatial_over_time.py: Plots GeoSpatial data of mental health disorders globally over time
+specific_country_plots.py: Plots a specific country's economic stats vs. a mental health statistic and determines the corresponding spearman correlation coefficient
+specific_time.py: Plots GeoSpatial data of the world's economic or mental health statistics and runs a tensorflow neural network
+comparing economic data to the stated mental health variable
+
+
+Features:
+ - In all three function files I utilize pandas to correctly read in the csv and make the raw data usable. I also use matlab in the three
+   files to plot data
+ - In geospatial_over_time.py I use plotly and geopandas in order to make a GeoSpatial map that can animate over time. 
+ - In specific_time.py I utilize tensorflow and sklearn to create a neural network to predict data outcomes.
+   I also use seaborn to create a heatmap of the correlation coefficients of the input vs output data within my model. Lastly, I use 
+   Geopandas to visualize the statistic you wish to plot GeoSpatially
+
+
